@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePenalty: 2
   penaltyIncrease: 0.5
-  hitSfx: {fileID: 0}
+  hitSfx: {fileID: 8300000, guid: e7992d172691ce147bde04a9ea103f2c, type: 3}
 --- !u!61 &1288040717352069321
 BoxCollider2D:
   m_ObjectHideFlags: 0

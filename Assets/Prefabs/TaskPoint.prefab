@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1205626512769441728}
   - component: {fileID: 61676070286980164}
-  - component: {fileID: 7862689449054975065}
   - component: {fileID: 2220681386154036414}
   m_Layer: 0
   m_Name: TaskPoint
@@ -86,19 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7862689449054975065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 360207656168285661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3b8c94b9c575fa49be07af4b33e3322, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeBonus: 3
 --- !u!58 &2220681386154036414
 CircleCollider2D:
   m_ObjectHideFlags: 0

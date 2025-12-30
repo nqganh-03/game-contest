@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Task
   - Bullet
+  - Water
+  - Star
   layers:
   - Default
   - TransparentFX
