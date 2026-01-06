@@ -7,7 +7,7 @@ public class GameManage : MonoBehaviour
     public static GameManage Instance; // Singleton
 
     [Header("Cài đặt Game")]
-    public float totalTime = 60f;
+    public float totalTime = 300f;
     public float currentTime;
     public bool isGameOver = false;
 
