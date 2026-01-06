@@ -17,10 +17,15 @@ public class GameManage : MonoBehaviour
     public GameObject[] winStars;
 
     [Header("UI References")]
-    public Text timerText;
+    public Text starCounter;
+    public Slider timeBar;
     public GameObject winPanel;
     public GameObject losePanel;
     public GameObject nextLevelButton;
+
+    [Header("Pause Menu")]
+    public GameObject pausePanel;
+    private bool isPaused = false;
 
     void Awake()
     {
@@ -35,6 +40,13 @@ public class GameManage : MonoBehaviour
         isGameOver = false;
         Time.timeScale = 1;
 
+        // Set slider max value
+        if (timeBar != null)
+        {
+            timeBar.maxValue = totalTime;
+            timeBar.value = currentTime;
+        }
+
         if (winPanel != null) winPanel.SetActive(false);
         if (losePanel != null) losePanel.SetActive(false);
 
@@ -46,14 +58,27 @@ public class GameManage : MonoBehaviour
                 if (star != null) star.SetActive(false);
             }
         }
+
+        // Update star counter
+        UpdateStarCounter();
     }
 
     void Update()
     {
-        if (isGameOver) return;
+        // Check for ESC key
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
+
+        if (isGameOver || isPaused) return; // isPaused check
 
         currentTime -= Time.deltaTime;
-        if (timerText != null) timerText.text = "Time: " + Mathf.Ceil(currentTime).ToString();
+
+        if (timeBar != null)
+        {
+            timeBar.value = currentTime;
+        }
 
         if (currentTime <= 0)
         {
@@ -62,12 +87,21 @@ public class GameManage : MonoBehaviour
         }
     }
 
+    void UpdateStarCounter()
+    {
+        if (starCounter != null)
+        {
+            starCounter.text = "⭐ " + starsCollected + "/3"; // Adjust /3 based on total stars in level
+        }
+    }
+
     // --- HÀM ĂN SAO ---
     public void CollectStar()
     {
         if (isGameOver) return;
         starsCollected++; // Tăng số lượng sao lên 1
-        Debug.Log("Đã ăn sao! Tổng: " + starsCollected);
+        UpdateStarCounter();
+        Debug.Log("Star Collected: " + starsCollected);
     }
 
     public void WinGame()
@@ -122,6 +156,20 @@ public class GameManage : MonoBehaviour
     public void AddTime(float amount)
     {
         if (!isGameOver) currentTime += amount;
+    }
+
+    public void TogglePause()
+    {
+        isPaused = !isPaused;
+        if (pausePanel != null) pausePanel.SetActive(isPaused);
+        Time.timeScale = isPaused ? 0f : 1f;
+    }
+
+    public void ContinueGame()
+    {
+        isPaused = false;
+        if (pausePanel != null) pausePanel.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     public void RestartLevel() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
